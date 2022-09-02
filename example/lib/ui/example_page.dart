@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'package:sleek_circular_slider/leafe_circular_slider.dart';
 
 class ExampleViewModel {
   final List<Color> pageColors;
