@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:example/utils.dart';
 
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/leafe_circular_slider.dart';
+import 'package:leafe_circular_slider/leafe_circular_slider.dart';
 
 class RandomValuePage extends StatefulWidget {
   @override
