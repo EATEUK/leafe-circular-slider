@@ -35,7 +35,7 @@ class _RandomValuePageState extends State<RandomValuePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SleekCircularSlider(
+                    LeafeCircularSlider(
                       appearance: appearance01,
                       initialValue: _currentValue.toDouble(),
                     ),

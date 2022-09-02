@@ -15,7 +15,7 @@ part 'custom_gesture_recognizer.dart';
 typedef void OnChange(double value);
 typedef Widget InnerWidget(double percentage);
 
-class SleekCircularSlider extends StatefulWidget {
+class LeafeCircularSlider extends StatefulWidget {
   final double initialValue;
   final double min;
   final double max;
@@ -31,7 +31,7 @@ class SleekCircularSlider extends StatefulWidget {
     return valueToAngle(initialValue, min, max, appearance.angleRange);
   }
 
-  const SleekCircularSlider(
+  const LeafeCircularSlider(
       {Key? key,
       this.initialValue = 50,
       this.min = 0,
@@ -46,10 +46,10 @@ class SleekCircularSlider extends StatefulWidget {
         assert(initialValue >= min && initialValue <= max),
         super(key: key);
   @override
-  _SleekCircularSliderState createState() => _SleekCircularSliderState();
+  _LeafeCircularSliderState createState() => _LeafeCircularSliderState();
 }
 
-class _SleekCircularSliderState extends State<SleekCircularSlider>
+class _LeafeCircularSliderState extends State<LeafeCircularSlider>
     with SingleTickerProviderStateMixin {
   bool _isHandlerSelected = false;
   bool _animationInProgress = false;
@@ -83,7 +83,7 @@ class _SleekCircularSliderState extends State<SleekCircularSlider>
   }
 
   @override
-  void didUpdateWidget(SleekCircularSlider oldWidget) {
+  void didUpdateWidget(LeafeCircularSlider oldWidget) {
     if (oldWidget.angle != widget.angle &&
         _currentAngle?.toStringAsFixed(4) != widget.angle.toStringAsFixed(4)) {
       _animate();

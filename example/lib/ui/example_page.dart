@@ -37,7 +37,7 @@ class ExamplePage extends StatelessWidget {
                 tileMode: TileMode.clamp)),
         child: SafeArea(
           child: Center(
-              child: SleekCircularSlider(
+              child: LeafeCircularSlider(
             onChangeStart: (double value) {},
             onChangeEnd: (double value) {},
             innerWidget: viewModel.innerWidget,
