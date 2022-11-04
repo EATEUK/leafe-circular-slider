@@ -109,12 +109,23 @@ class _CurvePainter extends CustomPainter {
     canvas.drawCircle(handler, appearance.handlerSize, dotPaint);
 
     if (targetAngle != null) {
-      Offset handler2 =
-          degreesToCoordinates(center!, targetAngle! + 6.5, radius + 22);
+      var targetSize = 75.0;
+      var halfTargetSize = targetSize / 2;
+      Offset handler2 = degreesToCoordinates(
+        center!,
+        -math.pi / 2 + startAngle + targetAngle! + 3.0,
+        radius + targetSize - 10,
+      );
 
-      canvas.translate(handler2.dx, handler2.dy);
-      canvas.rotate((targetAngle! * math.pi / 180) + (3 * math.pi / 2));
-      TargetPainter().paint(canvas, Size(75, 75));
+      canvas.translate(
+          handler2.dx - halfTargetSize, handler2.dy - halfTargetSize);
+
+      canvas.translate(halfTargetSize, halfTargetSize);
+      canvas.rotate(
+          degreeToRadians(startAngle + targetAngle! + 3.0) + 3 * math.pi / 2);
+      canvas.translate(-halfTargetSize, -halfTargetSize);
+
+      TargetPainter().paint(canvas, Size(targetSize, targetSize));
     }
   }
 
@@ -1246,7 +1257,7 @@ class TargetPainter extends CustomPainter {
     path_18.close();
 
     Paint paint_18_fill = Paint()..style = PaintingStyle.fill;
-    paint_18_fill.color = Color.fromARGB(255, 57, 209, 55).withOpacity(1.0);
+    paint_18_fill.color = Color(0xFF39D137).withOpacity(1.0);
     canvas.drawPath(path_18, paint_18_fill);
     Paint paint_18_stroke = Paint()..style = PaintingStyle.stroke;
     paint_18_stroke.strokeWidth = 2.0;
