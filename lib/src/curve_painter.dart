@@ -11,7 +11,10 @@ class _CurvePainter extends CustomPainter {
   late double radius;
 
   _CurvePainter(
-      {required this.appearance, this.angle = 30, required this.startAngle, required this.angleRange});
+      {required this.appearance,
+      this.angle = 30,
+      required this.startAngle,
+      required this.angleRange});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -76,18 +79,13 @@ class _CurvePainter extends CustomPainter {
         ? appearance.progressBarColors.reversed.toList()
         : appearance.progressBarColors;
 
-    final progressBarGradient = kIsWeb
-        ? LinearGradient(
-            tileMode: TileMode.mirror,
-            colors: colors,
-          )
-        : SweepGradient(
-            transform: rotation,
-            startAngle: degreeToRadians(gradientStartAngle),
-            endAngle: degreeToRadians(gradientEndAngle),
-            tileMode: TileMode.mirror,
-            colors: colors,
-          );
+    final progressBarGradient = SweepGradient(
+      transform: rotation,
+      startAngle: degreeToRadians(gradientStartAngle),
+      endAngle: degreeToRadians(gradientEndAngle),
+      tileMode: TileMode.mirror,
+      colors: colors,
+    );
 
     final progressBarPaint = Paint()
       ..shader = progressBarGradient.createShader(progressBarRect)

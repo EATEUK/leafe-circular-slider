@@ -2,7 +2,6 @@ library circular_slider;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:leafe_circular_slider/src/slider_animations.dart';
 import 'utils.dart';
 import 'appearance.dart';
