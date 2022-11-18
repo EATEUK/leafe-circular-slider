@@ -25,24 +25,26 @@ class LeafeCircularSlider extends StatefulWidget {
   final OnChange? onChangeStart;
   final OnChange? onChangeEnd;
   final InnerWidget? innerWidget;
+  final double? targetAngle;
   static const defaultAppearance = CircularSliderAppearance();
 
   double get angle {
     return valueToAngle(initialValue, min, max, appearance.angleRange);
   }
 
-  const LeafeCircularSlider(
-      {Key? key,
-      this.initialValue = 50,
-      this.min = 0,
-      this.max = 100,
-      this.minWidth = 25,
-      this.appearance = defaultAppearance,
-      this.onChange,
-      this.onChangeStart,
-      this.onChangeEnd,
-      this.innerWidget})
-      : assert(min <= max),
+  const LeafeCircularSlider({
+    Key? key,
+    this.initialValue = 50,
+    this.min = 0,
+    this.max = 100,
+    this.minWidth = 25,
+    this.appearance = defaultAppearance,
+    this.onChange,
+    this.onChangeStart,
+    this.onChangeEnd,
+    this.innerWidget,
+    this.targetAngle,
+  })  : assert(min <= max),
         assert(initialValue >= min && initialValue <= max),
         super(key: key);
   @override
@@ -188,10 +190,12 @@ class _LeafeCircularSliderState extends State<LeafeCircularSlider>
         counterClockwise: counterClockwise);
 
     _painter = _CurvePainter(
-        startAngle: _startAngle,
-        angleRange: _angleRange,
-        angle: _currentAngle! < 0.5 ? 0.5 : _currentAngle!,
-        appearance: widget.appearance);
+      startAngle: _startAngle,
+      angleRange: _angleRange,
+      angle: _currentAngle! < 0.5 ? 0.5 : _currentAngle!,
+      appearance: widget.appearance,
+      targetAngle: widget.targetAngle,
+    );
     _oldWidgetAngle = widget.angle;
     _oldWidgetValue = widget.initialValue;
   }

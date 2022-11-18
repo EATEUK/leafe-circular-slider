@@ -5,13 +5,19 @@ class _CurvePainter extends CustomPainter {
   final CircularSliderAppearance appearance;
   final double startAngle;
   final double angleRange;
+  final double? targetAngle;
 
   Offset? handler;
   Offset? center;
   late double radius;
 
-  _CurvePainter(
-      {required this.appearance, this.angle = 30, required this.startAngle, required this.angleRange});
+  _CurvePainter({
+    required this.appearance,
+    this.angle = 30,
+    required this.startAngle,
+    required this.angleRange,
+    this.targetAngle,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -101,6 +107,26 @@ class _CurvePainter extends CustomPainter {
     Offset handler = degreesToCoordinates(
         center!, -math.pi / 2 + startAngle + currentAngle + 1.5, radius);
     canvas.drawCircle(handler, appearance.handlerSize, dotPaint);
+
+    if (targetAngle != null) {
+      var targetSize = 30.0;
+      var halfTargetSize = targetSize / 2;
+      Offset handler2 = degreesToCoordinates(
+        center!,
+        -math.pi / 2 + startAngle + targetAngle! + 3.0,
+        radius + targetSize + 10,
+      );
+
+      canvas.translate(
+          handler2.dx - halfTargetSize, handler2.dy - halfTargetSize);
+
+      canvas.translate(halfTargetSize, halfTargetSize);
+      canvas.rotate(
+          degreeToRadians(startAngle + targetAngle! + 3.0) + math.pi / 2);
+      canvas.translate(-halfTargetSize, -halfTargetSize);
+
+      TargetPainter().paint(canvas, Size(targetSize, targetSize));
+    }
   }
 
   drawCircularArc(
@@ -142,6 +168,34 @@ class _CurvePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+//Copy this CustomPainter code to the Bottom of the File
+class TargetPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path path_0 = Path();
+    path_0.moveTo(size.width * 0.4998906, size.height * 0.9361823);
+    path_0.lineTo(size.width * 0.9518270, size.height * 0.03235028);
+    path_0.lineTo(size.width * 0.04804537, size.height * 0.03235028);
+    path_0.lineTo(size.width * 0.4998906, size.height * 0.9361823);
+    path_0.close();
+
+    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
+    paint_0_fill.color = Color(0xff39d137).withOpacity(1.0);
+    paint_0_fill.strokeWidth = 10.0;
+    canvas.drawPath(path_0, paint_0_fill);
+    var paint_0_stroke = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.5
+      ..color = Color.fromARGB(255, 0, 0, 0).withOpacity(1.0);
+    canvas.drawPath(path_0, paint_0_stroke);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
   }
 }
